@@ -104,6 +104,7 @@ def compile_with_nuitka(
     addfiles: Union[list, None] = None,
     delete_onefile_temp=False,
     needs_admin=False,
+    relativefolderinapps=None,
 ) -> str:
     r"""
     Compiles a Python file using Nuitka.
@@ -154,17 +155,19 @@ def compile_with_nuitka(
     addtocmd = addtocmd + f" --file-version={file_version}"
 
     if not delete_onefile_temp:
-        basename = ".".join(os.path.basename(__file__).split(".")[:-1])
+        if not relativefolderinapps:
+            basename = ".".join(os.path.basename(pyfile).split(".")[:-1])
+        else:
+            basename = relativefolderinapps.strip('\\" ')
         cdi = f"%CACHE_DIR%/{basename}/{file_version}"
         addtocmd = addtocmd + f" --onefile-tempdir-spec={cdi}"
 
     backs = "\\"
     forw = "/"
     wholecommand = (
-        f'start "" "{sys.executable}" -m nuitka {pyfile.replace(backs, forw)} --assume-yes-for-downloads'
+        f'start "" "{sys.executable}" -m nuitka {pyfile.replace(backs, forw)} --standalone --assume-yes-for-downloads'
         + addtocmd
     )
     p = subprocess.Popen(wholecommand, shell=True)
 
     return wholecommand
-
