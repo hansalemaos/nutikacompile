@@ -28,25 +28,34 @@ print(wholecommand)
 start "" "C:\ProgramData\anaconda3\envs\adda\python.exe" -m nuitka C:/ProgramData/anaconda3/envs/adda/secretsubprocess.py --assume-yes-for-downloads --output-dir=c:/compiledapptest --windows-disable-console --onefile --windows-icon-from-ico=C:/Users/hansc/AppData/Local/Temp/tmpb4w1z8d9.ico --include-data-files=C:/Users/hansc/AppData/Local/Temp/tmpb4i48w8_=.//=**/*.* --windows-uac-admin --file-version=1.0.0.0 --onefile-tempdir-spec=%CACHE_DIR%/nutikacompile/1.0.0.0
 
 
-
-compile_with_nuitka(pyfile: str, icon: Optional[str] = None, disable_console: bool = True, onefile: bool = True, file_version: str = '1', outputdir: Optional[str] = None, addfiles: Optional[list] = None, delete_onefile_temp=False, needs_admin=False) -> str
+compile_with_nuitka(
+    pyfile: str,
+    icon: Union[str, None] = None,
+    disable_console: bool = True,
+    onefile: bool = True,
+    file_version: str = "1",
+    outputdir: Union[str, None] = None,
+    addfiles: Union[list, None] = None,
+    delete_onefile_temp: bool = False,
+    needs_admin: bool = False,
+    relativefolderinapps: Union[None, str] = None,
+    arguments2add: str = "",
+) -> str
     Compiles a Python file using Nuitka.
-    
+
     Args:
         pyfile (str): The path to the Python file to be compiled.
-        icon (Union[str, None], optional): The path to the icon file to be used for the compiled executable, all formats that PIL can read are fine. Defaults to None.
+        icon (Union[str, None], optional): The path to the icon file to be used for the compiled executable. Defaults to None.
         disable_console (bool, optional): Whether to disable the console window for the compiled executable. Defaults to True.
         onefile (bool, optional): Whether to create a single executable file. Defaults to True.
-        file_version (str, optional): The version number to be assigned to the compiled executable.
-                                       File version to use in version information. Must be a
-                                        sequence of up to 4 numbers, e.g. 1.0 or 1.0.0.0, no
-                                        more digits are allowed, no strings are allowed. Defaults to "1".
-    
+        file_version (str, optional): The version number to be assigned to the compiled executable. Defaults to "1".
         outputdir (Union[str, None], optional): The path to the directory where the compiled executable will be saved. Defaults to None.
         addfiles (Union[list, None], optional): A list of files to be included in the compiled executable. Defaults to None.
-        delete_onefile_temp (bool, optional): Whether to delete the temporary directory created for the single executable file. Defaults to False.
+        delete_onefile_temp (bool, optional): Whether to delete the temporary directory for the single executable file. Defaults to False.
         needs_admin (bool, optional): Whether the compiled executable requires administrative privileges to run. Defaults to False.
-    
+        relativefolderinapps (Union[None, str], optional): The relative folder path to be used for the compiled executable. Defaults to None.
+        arguments2add (str, optional): Additional arguments to be passed to the Nuitka compiler. Defaults to "".
+
     Returns:
         str: The command used to compile the Python file.
 ```
