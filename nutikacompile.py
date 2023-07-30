@@ -100,6 +100,10 @@ def compile_with_nuitka(
     disable_console: bool = True,
     onefile: bool = True,
     file_version: str = "1",
+    file_description: str = "",
+    product_name: str = "",
+    copyright: str = "",
+    trademarks: str = "",
     outputdir: Union[str, None] = None,
     addfiles: Union[list, None] = None,
     delete_onefile_temp: bool = False,
@@ -152,6 +156,10 @@ def compile_with_nuitka(
         addtocmd = addtocmd + " --windows-uac-admin"
 
     addtocmd = addtocmd + f" --file-version={file_version}"
+    addtocmd = addtocmd + f' --product-name="{product_name}"'
+    addtocmd = addtocmd + f' --file-description="{file_description}"'
+    addtocmd = addtocmd + f' --copyright="{copyright}"'
+    addtocmd = addtocmd + f' --trademarks="{trademarks}"'
 
     if not delete_onefile_temp:
         if not relativefolderinapps:
