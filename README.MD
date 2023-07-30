@@ -1,5 +1,8 @@
 # A function that creates the cmd line for nuitka and executes it 
 
+update:
+Added executable properties description
+This information is useful in some scenarios, such as notifications
 
 ```python
 pip install nutikacompile
@@ -13,6 +16,10 @@ wholecommand = compile_with_nuitka(
     icon=r"C:\Users\hansc\Pictures\radiobutton.png",
     disable_console=True,
     file_version="1.0.0.0",
+    file_description="My App",
+    product_name="My app that do something",
+    copyright="(c) Acme",
+    trademarks="(c) Acme LTDA",
     onefile=True,
     outputdir="c:\\compiledapptest",
     addfiles=[
